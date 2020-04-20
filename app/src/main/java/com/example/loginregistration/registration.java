@@ -81,18 +81,13 @@ public class registration extends AppCompatActivity {
                          FirebaseUser user = fAuth.getCurrentUser();
                          String userID = user.getUid();
                          DatabaseReference regData = FirebaseDatabase.getInstance().getReference();
-
-                         regData.child("user").setValue(userID);
+                         
+                         regData.child("user").push();
                          regData.child("user").child(userID).child("email").setValue(email);
                          regData.child("user").child(userID).child("first").setValue(first);
                          regData.child("user").child(userID).child("last").setValue(last);
                          regData.child("user").child(userID).child("password").setValue(password);
                          startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-                         //DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-                         //DatabaseReference dataChild = database.child("email");
-
-                         //dataChild.setValue(email);
 
                      }else{
                          Toast.makeText(registration.this, "Error ! =" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
